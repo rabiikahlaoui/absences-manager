@@ -9,9 +9,8 @@ const app = express();
 
 // Configuring the app
 app.use(cors());
-app.use( bodyParser.json());
-app.use( bodyParser.urlencoded({ extended: true} )
-);
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // Setup routes
 app.use('/api/absences', absencesRouter);
