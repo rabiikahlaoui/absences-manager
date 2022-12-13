@@ -23,7 +23,7 @@ const absencesLoadedAction = (absences: any[]): AbsencesAction => ({
 })
 
 /**
- * Action to dispatch to clear absences from the store 
+ * Action to dispatch to clear absences from the store
  */
 const clearAbsencesAction = (): AbsencesAction => ({
   type: AbsencesActionType.CLEAR_ALL_ABSENSES
