@@ -1,0 +1,12 @@
+[
+  {
+    "id": 1,
+    "memberNote": "Enjoy your trip",
+    "type": "vacation"
+  },
+  {
+    "id": 2,
+    "memberNote": "Get well soon",
+    "type": "sickness"
+  }
+]

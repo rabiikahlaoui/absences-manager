@@ -2,12 +2,12 @@ import { AbsencesActionType } from '../action-types/absencesActionType'
 import { AbsencesAction } from '../actions/absencesActions'
 
 interface absencesState {
-  status: 'Loading' | 'Success'
+  status: 'Loading' | 'Success' | null
   data: any[] | null
 }
 
-const initialState: absencesState = {
-  status: 'Success',
+export const initialState: absencesState = {
+  status: null,
   data: []
 }
 

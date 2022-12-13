@@ -3,7 +3,7 @@ import { AbsencesActionType } from '../action-types/absencesActionType'
 type loadAbsencesAction = {
   type: AbsencesActionType.LOAD_ALL_ABSENSES
   payload: {
-    status: string,
+    status: string | null,
     data: any[] | null
   }
 }
