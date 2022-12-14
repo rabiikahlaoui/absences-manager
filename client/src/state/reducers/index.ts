@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import AbsencesReducer from './absencesReducer'
+import MembersReducer from './membersReducer'
 
 const reducers = combineReducers({
-  absences: AbsencesReducer
+  absences: AbsencesReducer,
+  members: MembersReducer
 })
 
 export default reducers

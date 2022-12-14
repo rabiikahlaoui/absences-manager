@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { loadAbsences, clearAbsences } from '../../state/action-creators/absencesActionCreators'
-import getAbsences from '../../state/selectors/absencesSelectors'
+import { loadMembers, clearMembers } from '../../state/action-creators/membersActionCreators'
+import { getMembersAbsences } from '../../state/selectors/absencesSelectors'
 
 import AbsenceFilter from './AbsencesFilter'
 import AbsenceList from './AbsencesList'
@@ -10,21 +11,27 @@ import AbsencePaginator from './AbsencesPaginator'
 
 const AbsencePage: React.FC<{}> = () => {
   const dispatch = useDispatch<any>()
-  const absences = useSelector(getAbsences)
+  const membersAbsences = useSelector(getMembersAbsences)
 
   // Dispatch load absences on component mount
-  useEffect(() => { dispatch(loadAbsences()) }, [])
+  useEffect(() => {
+    dispatch(loadAbsences())
+    dispatch(loadMembers())
+  }, [])
 
   // Dispatch clear absences on component unmount
-  useEffect(() => () => { clearAbsences() }, [])
+  useEffect(() => () => {
+    clearAbsences()
+    clearMembers()
+  }, [])
 
   return (
     <Wrapper>
       <AbsenceFilter />
       <AbsencePaginator />
       <AbsenceList
-        status={absences.status}
-        absences={absences?.data}
+        status={membersAbsences.status}
+        absences={membersAbsences?.data}
       />
     </Wrapper>
   )
