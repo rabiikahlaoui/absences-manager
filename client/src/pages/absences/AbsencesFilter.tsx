@@ -34,7 +34,7 @@ const AbsencesFilter: React.FC = () => {
 
   // Dispatch the local state to redux
   const dispatchFilter = (): void => {
-    dispatch(filterAbsences(filterData))
+    dispatch(absencesActionCreators.filterAbsences(filterData))
   }
 
   return (

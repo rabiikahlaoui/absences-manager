@@ -5,7 +5,7 @@ import { Alert, Loader } from '../../components'
 import { absencesActionCreators, membersActionCreators } from '../../state'
 import { getMembersAbsences } from '../../state/selectors/absencesSelectors'
 import RequestStatus from '../../type-defs/requestStatus'
-import { AbsencesFilter, AbsenceList, AbsencePaginator } from '.'
+import { AbsencesFilter, AbsencesList, AbsencesPaginator } from '.'
 
 // For pagination filter
 interface Pagination {
@@ -77,13 +77,13 @@ const AbsencePage: React.FC = () => {
       {membersAbsences.data.length > 0
         ? (
           <>
-            <AbsencePaginator
+            <AbsencesPaginator
               currentPage={pagination.currentPage}
               totalPages={calculateTotalPages(membersAbsences.data.length)}
               totalAbsences={membersAbsences.data.length}
               onPageChange={(newPage: number) => setPage(newPage)}
             />
-            <AbsenceList
+            <AbsencesList
               absences={
                 membersAbsences.data.slice(
                   paginate(pagination.currentPage).from,

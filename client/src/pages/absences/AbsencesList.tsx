@@ -7,7 +7,7 @@ interface Props {
   absences: MemberAbsence[] | null
 }
 
-const AbsenceList: React.FC<Props> = ({ absences }) => {
+const AbsencesList: React.FC<Props> = ({ absences }) => {
   return (
     <>
       <ListWrapper>
@@ -58,4 +58,4 @@ const ListWrapper = styled.div`
   }
 `
 
-export default AbsenceList
+export default AbsencesList

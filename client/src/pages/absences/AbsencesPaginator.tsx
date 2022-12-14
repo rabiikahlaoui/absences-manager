@@ -8,7 +8,7 @@ interface Props {
   onPageChange: Function
 }
 
-const AbsencePaginator: React.FC<Props> = ({ currentPage, totalPages, totalAbsences, onPageChange }) => {
+const AbsencesPaginator: React.FC<Props> = ({ currentPage, totalPages, totalAbsences, onPageChange }) => {
   const applyPageChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const paginationValue = e.target.value as unknown as number
 
@@ -149,4 +149,4 @@ const PaginationWrapper = styled.div`
   }
 `
 
-export default AbsencePaginator
+export default AbsencesPaginator
