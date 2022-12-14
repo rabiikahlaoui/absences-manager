@@ -6,15 +6,25 @@ import Loader from '../../components/Loader'
 import { loadAbsences, clearAbsences } from '../../state/action-creators/absencesActionCreators'
 import { loadMembers, clearMembers } from '../../state/action-creators/membersActionCreators'
 import { getMembersAbsences } from '../../state/selectors/absencesSelectors'
+import RequestStatus from '../../type-defs/requestStatus'
 
 import AbsenceFilter from './AbsencesFilter'
 import AbsenceList from './AbsencesList'
 import AbsencePaginator from './AbsencesPaginator'
 
+// For pagination filter
 interface Pagination {
   currentPage: number
   totalPages: number
 }
+
+// For array slice method
+interface Paginate {
+  from: number
+  to: number
+}
+
+const itemsPerPage = 10
 
 const AbsencePage: React.FC = () => {
   const [pagination, setPagination] = useState<Pagination>({ currentPage: 0, totalPages: 0 })
@@ -48,11 +58,21 @@ const AbsencePage: React.FC = () => {
     setPagination({ ...pagination, currentPage })
   }
 
-  if (membersAbsences.status === 'Loading') {
+  // Calculate current page and next page indexes
+  const paginate = (currentPage: number): Paginate => {
+    return {
+      from: (currentPage - 1) * itemsPerPage,
+      to: currentPage * itemsPerPage
+    }
+  }
+
+  // Handle loading in initial state and loading status
+  if ([RequestStatus.Loading, null].includes(membersAbsences.status)) {
     return <Loader />
   }
 
-  if (!Array.isArray(membersAbsences.data)) {
+  // Handle error
+  if (membersAbsences.status === RequestStatus.Error || !Array.isArray(membersAbsences.data)) {
     return <Alert message='Failed to load the list' />
   }
 
@@ -69,8 +89,12 @@ const AbsencePage: React.FC = () => {
               onPageChange={(newPage: number) => setPage(newPage)}
             />
             <AbsenceList
-              status={membersAbsences.status}
-              absences={membersAbsences.data.slice((pagination.currentPage - 1) * 10, pagination.currentPage * 10)}
+              absences={
+                membersAbsences.data.slice(
+                  paginate(pagination.currentPage).from,
+                  paginate(pagination.currentPage).to
+                )
+              }
             />
           </>
           )

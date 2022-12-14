@@ -4,17 +4,13 @@ import MemberAbsence from '../../type-defs/memberAbsence'
 import AbsencesItem from './AbsencesItem'
 
 interface Props {
-  status: string
   absences: MemberAbsence[] | null
 }
 
-const AbsenceList: React.FC<Props> = ({ status, absences }) => {
+const AbsenceList: React.FC<Props> = ({ absences }) => {
   return (
     <>
       <ListWrapper>
-        {status === 'Loading' && (
-          <span>Loading...</span>
-        )}
 
         <div className="absences-list--header">
           <div className="absences-list--header-label w-200px">Member name</div>

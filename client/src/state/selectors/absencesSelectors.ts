@@ -1,4 +1,5 @@
 import Absence from '../../type-defs/absence'
+import RequestStatus from '../../type-defs/requestStatus'
 import filterArrayByDate from '../../utils/filterArrayByDate'
 import mergeArrays from '../../utils/mergeArrays'
 
@@ -36,10 +37,17 @@ export const getMembersAbsences = (state: any): any => {
     }
   }
 
-  // Check loading status
-  if (absences.status === 'Loading' || members.status === 'Loading') {
+  // Check error status
+  if ([absences.status, members.status].includes(RequestStatus.Error)) {
     return {
-      status: 'Loading'
+      status: RequestStatus.Error
+    }
+  }
+
+  // Check loading status
+  if ([absences.status, members.status].includes(RequestStatus.Loading)) {
+    return {
+      status: RequestStatus.Loading
     }
   }
 
@@ -71,7 +79,7 @@ export const getMembersAbsences = (state: any): any => {
   }))
 
   return {
-    status: 'Success',
+    status: RequestStatus.Success,
     data: membersAbsences
   }
 }

@@ -10,6 +10,14 @@ type loadAbsencesAction = {
   }
 }
 
+type loadingAbsencesAction = {
+  type: AbsencesActionType.LOADING_ALL_ABSENCES
+}
+
+type errorLoadingAbsencesAction = {
+  type: AbsencesActionType.ERROR_LOADING_ABSENCES
+}
+
 type filterAbsencesAction = {
   type: AbsencesActionType.FILTER_ABSENCES,
   payload: AbsencesFilter
@@ -19,4 +27,4 @@ type clearAbsencesAction = {
   type: AbsencesActionType.CLEAR_ALL_ABSENCES
 }
 
-export type AbsencesAction = loadAbsencesAction | clearAbsencesAction | filterAbsencesAction
+export type AbsencesAction = loadAbsencesAction | loadingAbsencesAction | errorLoadingAbsencesAction | clearAbsencesAction | filterAbsencesAction

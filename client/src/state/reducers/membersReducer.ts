@@ -1,9 +1,10 @@
 import Member from '../../type-defs/member'
+import RequestStatus from '../../type-defs/requestStatus'
 import { MembersActionType } from '../action-types'
 import { MembersAction } from '../actions/membersActions'
 
 export interface MembersState {
-  status: 'Loading' | 'Success' | null
+  status: RequestStatus | null
   data: Member[] | null
 }
 
@@ -17,6 +18,16 @@ const reducer = (state: MembersState = initialState, action: MembersAction) => {
   switch (action.type) {
     case MembersActionType.LOAD_ALL_MEMBERS:
       return action.payload
+
+    case MembersActionType.LOADING_ALL_MEMBERS:
+      return {
+        status: RequestStatus.Loading
+      }
+
+    case MembersActionType.ERROR_LOADING_MEMBERS:
+      return {
+        status: RequestStatus.Error
+      }
 
     case MembersActionType.CLEAR_ALL_MEMBERS:
       return initialState

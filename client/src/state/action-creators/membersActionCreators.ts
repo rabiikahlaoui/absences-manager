@@ -4,13 +4,20 @@ import { MembersAction } from '../actions/membersActions'
 
 import membersService from '../../services/members.service'
 import Member from '../../type-defs/member'
+import RequestStatus from '../../type-defs/requestStatus'
 
 /**
  * Action to dispatch when members are loading
  */
 const membersLoadingStatusAction = (): MembersAction => ({
-  type: MembersActionType.LOAD_ALL_MEMBERS,
-  payload: { status: 'Loading', data: null }
+  type: MembersActionType.LOADING_ALL_MEMBERS
+})
+
+/**
+ * Action to dispatch when error occurs while loading members
+ */
+const membersErrorLoadingAction = (): MembersAction => ({
+  type: MembersActionType.ERROR_LOADING_MEMBERS
 })
 
 /**
@@ -19,7 +26,7 @@ const membersLoadingStatusAction = (): MembersAction => ({
  */
 const membersLoadedAction = (members: Member[]): MembersAction => ({
   type: MembersActionType.LOAD_ALL_MEMBERS,
-  payload: { status: 'Success', data: members }
+  payload: { status: RequestStatus.Success, data: members }
 })
 
 /**
@@ -39,10 +46,14 @@ export const loadMembers = () => async (dispatch: Dispatch<MembersAction>) => {
   try {
     const members = await membersService.getAll()
 
-    // Dispatch response data
-    dispatch(membersLoadedAction(members?.data?.payload))
+    if (members.data.message === RequestStatus.Success) {
+      // Dispatch response data
+      dispatch(membersLoadedAction(members.data.payload))
+    } else {
+      dispatch(membersErrorLoadingAction())
+    }
   } catch (err) {
-    console.log(err)
+    dispatch(membersErrorLoadingAction())
   }
 }
 

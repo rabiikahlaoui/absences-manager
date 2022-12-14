@@ -1,4 +1,5 @@
 import Absence from '../../type-defs/absence'
+import RequestStatus from '../../type-defs/requestStatus'
 import { AbsencesActionType } from '../action-types'
 import { AbsencesAction } from '../actions/absencesActions'
 
@@ -8,7 +9,7 @@ export interface AbsencesFilter {
 }
 
 interface AbsencesState {
-  status: 'Loading' | 'Success' | null
+  status: RequestStatus | null
   filter: AbsencesFilter
   data: Absence[] | null
 }
@@ -30,6 +31,18 @@ const reducer = (state: AbsencesState = initialState, action: AbsencesAction) =>
         status: action.payload.status,
         data: action.payload.data,
         filter: initialState.filter // Reset filter on load all
+      }
+
+    case AbsencesActionType.LOADING_ALL_ABSENCES:
+      return {
+        ...initialState,
+        status: RequestStatus.Loading
+      }
+
+    case AbsencesActionType.ERROR_LOADING_ABSENCES:
+      return {
+        ...initialState,
+        status: RequestStatus.Error
       }
 
     case AbsencesActionType.FILTER_ABSENCES:

@@ -5,13 +5,20 @@ import { AbsencesAction } from '../actions/absencesActions'
 import absencesService from '../../services/absences.service'
 import Absence from '../../type-defs/absence'
 import { AbsencesFilter } from '../reducers/absencesReducer'
+import RequestStatus from '../../type-defs/requestStatus'
 
 /**
  * Action to dispatch when absences are loading
  */
 const absencesLoadingStatusAction = (): AbsencesAction => ({
-  type: AbsencesActionType.LOAD_ALL_ABSENCES,
-  payload: { status: 'Loading', data: null }
+  type: AbsencesActionType.LOADING_ALL_ABSENCES
+})
+
+/**
+ * Action to dispatch when error occurs while loading absences
+ */
+const absencesErrorLoadingAction = (): AbsencesAction => ({
+  type: AbsencesActionType.ERROR_LOADING_ABSENCES
 })
 
 /**
@@ -20,7 +27,7 @@ const absencesLoadingStatusAction = (): AbsencesAction => ({
  */
 const absencesLoadedAction = (absences: Absence[]): AbsencesAction => ({
   type: AbsencesActionType.LOAD_ALL_ABSENCES,
-  payload: { status: 'Success', data: absences }
+  payload: { status: RequestStatus.Success, data: absences }
 })
 
 /**
@@ -49,10 +56,14 @@ export const loadAbsences = () => async (dispatch: Dispatch<AbsencesAction>) => 
   try {
     const absences = await absencesService.getAll()
 
-    // Dispatch response data
-    dispatch(absencesLoadedAction(absences.data.payload))
+    if (absences.data.message === RequestStatus.Success) {
+      // Dispatch response data
+      dispatch(absencesLoadedAction(absences.data.payload))
+    } else {
+      dispatch(absencesErrorLoadingAction())
+    }
   } catch (err) {
-    console.log(err)
+    dispatch(absencesErrorLoadingAction())
   }
 }
 

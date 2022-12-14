@@ -9,8 +9,16 @@ type loadMembersAction = {
   }
 }
 
+type loadingMembersAction = {
+  type: MembersActionType.LOADING_ALL_MEMBERS
+}
+
+type errorLoadingMembersAction = {
+  type: MembersActionType.ERROR_LOADING_MEMBERS
+}
+
 type clearMembersAction = {
   type: MembersActionType.CLEAR_ALL_MEMBERS
 }
 
-export type MembersAction = loadMembersAction | clearMembersAction
+export type MembersAction = loadMembersAction | clearMembersAction | loadingMembersAction | errorLoadingMembersAction
