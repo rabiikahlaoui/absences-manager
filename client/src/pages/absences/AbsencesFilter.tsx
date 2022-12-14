@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import DatePicker from '../../components/form/DatePicker'
-import Select from '../../components/form/Select'
+import { DatePicker, Select } from '../../components'
 import { filterAbsences } from '../../state/action-creators/absencesActionCreators'
 
 interface filterData {
