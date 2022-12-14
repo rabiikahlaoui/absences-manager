@@ -3,6 +3,8 @@ import { AbsencesActionType } from '../action-types'
 import { AbsencesAction } from '../actions/absencesActions'
 
 import absencesService from '../../services/absences.service'
+import Absence from '../../type-defs/absence'
+import { AbsencesFilter } from '../reducers/absencesReducer'
 
 /**
  * Action to dispatch when absences are loading
@@ -16,7 +18,7 @@ const absencesLoadingStatusAction = (): AbsencesAction => ({
  * Action to dispatch to load absences into the store
  * @absences absences list
  */
-const absencesLoadedAction = (absences: any[]): AbsencesAction => ({
+const absencesLoadedAction = (absences: Absence[]): AbsencesAction => ({
   type: AbsencesActionType.LOAD_ALL_ABSENCES,
   payload: { status: 'Success', data: absences }
 })
@@ -32,7 +34,7 @@ const clearAbsencesAction = (): AbsencesAction => ({
  * Action to dispatch to update the filter
  * @filterData absences filter data
  */
-const filterAbsencesAction = (filterData: any): AbsencesAction => ({
+const filterAbsencesAction = (filterData: AbsencesFilter): AbsencesAction => ({
   type: AbsencesActionType.FILTER_ABSENCES,
   payload: filterData
 })
@@ -65,6 +67,6 @@ export const clearAbsences = () => (dispatch: Dispatch<AbsencesAction>) => {
  * Filter absences
  * @filterData filter data
  */
-export const filterAbsences = (filterData: any) => async (dispatch: Dispatch<AbsencesAction>) => {
+export const filterAbsences = (filterData: AbsencesFilter) => async (dispatch: Dispatch<AbsencesAction>) => {
   dispatch(filterAbsencesAction(filterData))
 }

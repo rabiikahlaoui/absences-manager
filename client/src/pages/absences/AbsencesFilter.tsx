@@ -10,12 +10,12 @@ interface filterData {
   type: string | null
 }
 
-const AbsenceFilter: React.FC<{}> = () => {
+const AbsenceFilter: React.FC = () => {
   const [filterData, setFilterData] = useState<filterData>({ date: null, type: null })
   const dispatch = useDispatch<any>()
 
   // Set filter local state
-  const handleFilterChange = (e: any): void => {
+  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFilterData({
       ...filterData,
       [e.target.name]: e.target.value
@@ -45,7 +45,7 @@ const AbsenceFilter: React.FC<{}> = () => {
           label='Date of absence'
           value={filterData.date ?? ''}
           name='date'
-          onChange={(e: any) => handleFilterChange(e)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFilterChange(e)}
         />
         <Select
           label='Type of absence'
@@ -56,7 +56,7 @@ const AbsenceFilter: React.FC<{}> = () => {
             sickness: 'Sickness',
             vacation: 'Vacation'
           }}
-          onChange={(e: any) => handleFilterChange(e)}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleFilterChange(e)}
         />
         <button className='absences-filter--reset-button' onClick={resetFilter}>Reset</button>
         <button className='absences-filter--apply-button' onClick={dispatchFilter}>Apply</button>

@@ -1,3 +1,4 @@
+import Absence from '../../type-defs/absence'
 import filterArrayByDate from '../../utils/filterArrayByDate'
 import mergeArrays from '../../utils/mergeArrays'
 
@@ -44,14 +45,14 @@ export const getMembersAbsences = (state: any): any => {
 
   // Apply filter by date
   if (absences.filter.date !== null) {
-    absences.data = absences.data.filter((item: any) => (
+    absences.data = absences.data.filter((item: Absence) => (
       filterArrayByDate(item.startDate, item.endDate, absences.filter.date)
     ))
   }
 
   // Apply filter by type
   if (absences.filter.type !== null) {
-    absences.data = absences.data.filter((item: any) => (
+    absences.data = absences.data.filter((item: Absence) => (
       absences.filter.type === 'allAbsences' ? true : item.type === absences.filter.type
     ))
   }
@@ -60,7 +61,7 @@ export const getMembersAbsences = (state: any): any => {
   let membersAbsences = mergeArrays(absences.data, members.data, 'userId')
 
   // Fill absence status
-  membersAbsences = membersAbsences.map((item: any) => ({
+  membersAbsences = membersAbsences.map((item: Absence) => ({
     ...item,
     status: item.confirmedAt === null
       ? item.rejectedAt === null

@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import MemberAbsence from '../../type-defs/memberAbsence'
 import onDownloadICalFile from '../../utils/generateICalFile'
 
 interface Props {
-  absence: any
+  absence: MemberAbsence
 }
 
 const AbsencesItem: React.FC<Props> = ({ absence }) => {
@@ -11,7 +12,7 @@ const AbsencesItem: React.FC<Props> = ({ absence }) => {
     <>
       <ItemWrapper>
         <div className="absences-list--item-value w-200px">
-          <div className="absences-list--item-image" style={{ backgroundImage: `url(${absence.image as string})` }}></div>
+          <div className="absences-list--item-image" style={{ backgroundImage: `url(${absence.image})` }}></div>
           <span className="absences-list--item-name">{absence.name}</span>
         </div>
         <div className="absences-list--item-value w-120px">{absence.type}</div>

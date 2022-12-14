@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Loader: React.FC<{}> = () => {
+const Loader: React.FC = () => {
   return (
     <>
         <LoaderWrapper>

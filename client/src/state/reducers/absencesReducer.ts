@@ -1,7 +1,8 @@
+import Absence from '../../type-defs/absence'
 import { AbsencesActionType } from '../action-types'
 import { AbsencesAction } from '../actions/absencesActions'
 
-interface AbsencesFilter {
+export interface AbsencesFilter {
   type: string | null
   date: string | null
 }
@@ -9,7 +10,7 @@ interface AbsencesFilter {
 interface AbsencesState {
   status: 'Loading' | 'Success' | null
   filter: AbsencesFilter
-  data: any[] | null
+  data: Absence[] | null
 }
 
 export const initialState: AbsencesState = {

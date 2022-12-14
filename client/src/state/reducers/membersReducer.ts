@@ -1,9 +1,10 @@
+import Member from '../../type-defs/member'
 import { MembersActionType } from '../action-types'
 import { MembersAction } from '../actions/membersActions'
 
-interface MembersState {
+export interface MembersState {
   status: 'Loading' | 'Success' | null
-  data: any[] | null
+  data: Member[] | null
 }
 
 export const initialState: MembersState = {

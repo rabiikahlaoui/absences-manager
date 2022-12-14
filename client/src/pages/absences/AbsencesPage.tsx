@@ -16,7 +16,7 @@ interface Pagination {
   totalPages: number
 }
 
-const AbsencePage: React.FC<{}> = () => {
+const AbsencePage: React.FC = () => {
   const [pagination, setPagination] = useState<Pagination>({ currentPage: 0, totalPages: 0 })
   const dispatch = useDispatch<any>()
   const membersAbsences = useSelector(getMembersAbsences)

@@ -3,6 +3,7 @@ import { MembersActionType } from '../action-types'
 import { MembersAction } from '../actions/membersActions'
 
 import membersService from '../../services/members.service'
+import Member from '../../type-defs/member'
 
 /**
  * Action to dispatch when members are loading
@@ -16,7 +17,7 @@ const membersLoadingStatusAction = (): MembersAction => ({
  * Action to dispatch to load members into the store
  * @members members list
  */
-const membersLoadedAction = (members: any[]): MembersAction => ({
+const membersLoadedAction = (members: Member[]): MembersAction => ({
   type: MembersActionType.LOAD_ALL_MEMBERS,
   payload: { status: 'Success', data: members }
 })

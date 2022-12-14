@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+import MemberAbsence from '../../type-defs/memberAbsence'
 import AbsencesItem from './AbsencesItem'
 
 interface Props {
   status: string
-  absences: any[] | null
+  absences: MemberAbsence[] | null
 }
 
 const AbsenceList: React.FC<Props> = ({ status, absences }) => {
@@ -26,7 +27,7 @@ const AbsenceList: React.FC<Props> = ({ status, absences }) => {
         </div>
 
         <div className="absences-list--body">
-          {(Array.isArray(absences)) && absences.map((item: any, index: number) => (
+          {(Array.isArray(absences)) && absences.map((item: MemberAbsence, index: number) => (
             <AbsencesItem
               key={index}
               absence={item}

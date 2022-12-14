@@ -9,8 +9,8 @@ interface Props {
 }
 
 const AbsencePaginator: React.FC<Props> = ({ currentPage, totalPages, totalAbsences, onPageChange }) => {
-  const applyPageChange = (e: any): void => {
-    const paginationValue = e.target.value
+  const applyPageChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const paginationValue = e.target.value as unknown as number
 
     if (isNaN(paginationValue)) {
       return
@@ -20,7 +20,7 @@ const AbsencePaginator: React.FC<Props> = ({ currentPage, totalPages, totalAbsen
       return
     }
 
-    onPageChange(paginationValue as number)
+    onPageChange(paginationValue)
   }
 
   const moveToPage = (pagePosition: number): void => {
