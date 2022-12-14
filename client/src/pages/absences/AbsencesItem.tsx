@@ -1,19 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const AbsencesItem: React.FC<{}> = () => {
+interface Props {
+  absence: any
+}
+
+const AbsencesItem: React.FC<Props> = ({ absence }) => {
   return (
     <>
       <ItemWrapper>
         <div className="absences-list--item-value w-200px">
-          <div className="absences-list--item-image" style={{ backgroundImage: 'url(https://loremflickr.com/300/400)' }}></div>
-          <span className="absences-list--item-name">Name</span>
+          <div className="absences-list--item-image" style={{ backgroundImage: `url(${absence.image as string})` }}></div>
+          <span className="absences-list--item-name">{absence.name}</span>
         </div>
-        <div className="absences-list--item-value w-120px">Sickness</div>
-        <div className="absences-list--item-value w-200px">2022-12-01 - 2022-12-06</div>
-        <div className="absences-list--item-value w-200px">Sorry</div>
-        <div className="absences-list--item-value w-120px">Approved</div>
-        <div className="absences-list--item-value w-200px">No problem</div>
+        <div className="absences-list--item-value w-120px">{absence.type}</div>
+        <div className="absences-list--item-value w-200px">{absence.startDate} - {absence.endDate}</div>
+        <div className="absences-list--item-value w-200px">{absence.memberNote}</div>
+        <div className="absences-list--item-value w-120px">status</div>
+        <div className="absences-list--item-value w-200px">{absence.admitterNote}</div>
         <div className="absences-list--item-value w-120px"></div>
       </ItemWrapper>
     </>

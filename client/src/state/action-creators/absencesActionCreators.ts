@@ -2,8 +2,7 @@ import { Dispatch } from 'redux'
 import { AbsencesActionType } from '../action-types/absencesActionType'
 import { AbsencesAction } from '../actions/absencesActions'
 
-// TODO: replace with API result
-import * as absencesTmpData from '../../__mocks__/absences.json'
+import absencesService from '../../services/absences.service'
 
 /**
  * Action to dispatch when absences are loading
@@ -32,12 +31,18 @@ const clearAbsencesAction = (): AbsencesAction => ({
 /**
  * Load absences
  */
-export const loadAbsences = () => (dispatch: Dispatch<AbsencesAction>) => {
+export const loadAbsences = () => async (dispatch: Dispatch<AbsencesAction>) => {
   // Dispatch loading action
   dispatch(absencesLoadingStatusAction())
 
-  // Dispatch response data
-  dispatch(absencesLoadedAction(absencesTmpData))
+  try {
+    const absences = await absencesService.getAll()
+
+    // Dispatch response data
+    dispatch(absencesLoadedAction(absences?.data?.payload))
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 /**

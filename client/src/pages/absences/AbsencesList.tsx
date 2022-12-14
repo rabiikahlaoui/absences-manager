@@ -2,10 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import AbsencesItem from './AbsencesItem'
 
-const AbsenceList: React.FC<{}> = () => {
+interface Props {
+  status: string
+  absences: any[] | null
+}
+
+const AbsenceList: React.FC<Props> = ({ status, absences }) => {
   return (
     <>
       <ListWrapper>
+        {status === 'Loading' && (
+          <span>Loading...</span>
+        )}
+
         <div className="absences-list--header">
           <div className="absences-list--header-label w-200px">Member name</div>
           <div className="absences-list--header-label w-120px">Type of absence</div>
@@ -15,11 +24,16 @@ const AbsenceList: React.FC<{}> = () => {
           <div className="absences-list--header-label w-200px">Admitter note</div>
           <div className="absences-list--header-label w-120px"></div>
         </div>
+
         <div className="absences-list--body">
-          <AbsencesItem />
-          <AbsencesItem />
-          <AbsencesItem />
+          {(Array.isArray(absences)) && absences.map((item: any, index: number) => (
+            <AbsencesItem
+              key={index}
+              absence={item}
+            />
+          ))}
         </div>
+
       </ListWrapper>
     </>
   )
