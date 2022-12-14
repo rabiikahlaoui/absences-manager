@@ -1,6 +1,6 @@
 // Redux components
 import reducer, { initialState } from "../../../state/reducers/absencesReducer";
-import { AbsencesActionType } from "../../../state/action-types/absencesActionType";
+import { AbsencesActionType } from "../../../state/action-types";
 
 // Mock Data
 import * as absencesTmpData from "../../../__mocks__/absences.json";
@@ -21,7 +21,7 @@ describe("Absences reducer", () => {
     };
 
     const dispatchedAction = {
-      type: AbsencesActionType.LOAD_ALL_ABSENSES,
+      type: AbsencesActionType.LOAD_ALL_ABSENCES,
       payload: {
         status: "Success",
         data: absencesTmpData,
@@ -38,7 +38,7 @@ describe("Absences reducer", () => {
     };
 
     const dispatchedAction = {
-      type: AbsencesActionType.CLEAR_ALL_ABSENSES,
+      type: AbsencesActionType.CLEAR_ALL_ABSENCES,
     };
 
     expect(reducer(previousState, dispatchedAction)).toEqual(initialState);

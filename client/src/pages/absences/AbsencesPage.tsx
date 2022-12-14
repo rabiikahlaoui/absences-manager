@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
-import { loadAbsences, clearAbsenses } from '../../state/action-creators/absencesActionCreators'
+import { loadAbsences, clearAbsences } from '../../state/action-creators/absencesActionCreators'
 import getAbsences from '../../state/selectors/absencesSelectors'
 
 import AbsenceFilter from './AbsencesFilter'
@@ -16,7 +16,7 @@ const AbsencePage: React.FC<{}> = () => {
   useEffect(() => { dispatch(loadAbsences()) }, [])
 
   // Dispatch clear absences on component unmount
-  useEffect(() => () => { clearAbsenses() }, [])
+  useEffect(() => () => { clearAbsences() }, [])
 
   return (
     <Wrapper>

@@ -2,8 +2,8 @@ import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 
 // Redux components
-import { AbsencesActionType } from '../../../state/action-types/absencesActionType'
-import { loadAbsences, clearAbsenses } from "../../../state/action-creators/absencesActionCreators";
+import { AbsencesActionType } from '../../../state/action-types'
+import { loadAbsences, clearAbsences } from "../../../state/action-creators/absencesActionCreators";
 
 // Mock Data
 import * as absencesTmpData from "../../../__mocks__/absences.json";
@@ -26,14 +26,14 @@ describe("Absences action creators", () => {
       const actions = store.getActions();
       const expectedPayload = [
         {
-          type: AbsencesActionType.LOAD_ALL_ABSENSES,
+          type: AbsencesActionType.LOAD_ALL_ABSENCES,
           payload: {
             status: "Loading",
             data: null,
           }
         },
         {
-          type: AbsencesActionType.LOAD_ALL_ABSENSES,
+          type: AbsencesActionType.LOAD_ALL_ABSENCES,
           payload: {
             status: "Success",
             data: absencesTmpData,
@@ -45,19 +45,19 @@ describe("Absences action creators", () => {
     });
   }); // loadAbsences action creator
 
-  describe("clearAbsenses action creator", () => {
+  describe("clearAbsences action creator", () => {
     it("should dispatch loading status and success status", () => {
       // Initialize mockstore with empty state
       const store = mockStore(initialState);
 
       // Dispatch the action
-      store.dispatch(clearAbsenses());
+      store.dispatch(clearAbsences());
 
       // Test if your store dispatched the expected actions
       const actions = store.getActions();
       const expectedPayload = [
         {
-          type: AbsencesActionType.CLEAR_ALL_ABSENSES
+          type: AbsencesActionType.CLEAR_ALL_ABSENCES
         },
       ];
 

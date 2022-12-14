@@ -1,4 +1,4 @@
-import { AbsencesActionType } from '../action-types/absencesActionType'
+import { AbsencesActionType } from '../action-types'
 import { AbsencesAction } from '../actions/absencesActions'
 
 interface absencesState {
@@ -14,10 +14,10 @@ export const initialState: absencesState = {
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const reducer = (state: absencesState = initialState, action: AbsencesAction) => {
   switch (action.type) {
-    case AbsencesActionType.LOAD_ALL_ABSENSES:
+    case AbsencesActionType.LOAD_ALL_ABSENCES:
       return action.payload
 
-    case AbsencesActionType.CLEAR_ALL_ABSENSES:
+    case AbsencesActionType.CLEAR_ALL_ABSENCES:
       return initialState
 
     default:
