@@ -1,9 +1,6 @@
 import filterArrayByDate from '../../utils/filterArrayByDate'
 import mergeArrays from '../../utils/mergeArrays'
 
-// TODO: make it a global config
-const absencesPerPage = 10
-
 /**
  * Get all absences
  * @param state redux store
@@ -20,15 +17,6 @@ const getAbsences = (state: any): any => {
  */
 export const getAbsencesFilter = (state: any): any => {
   return state.absences.filter
-}
-
-/**
- * Get absences pagination
- * @param state redux store
- * @returns absences pagination data
- */
-export const getAbsencesPagination = (state: any): any => {
-  return state.absences.pagination
 }
 
 /**
@@ -66,13 +54,6 @@ export const getMembersAbsences = (state: any): any => {
     absences.data = absences.data.filter((item: any) => (
       absences.filter.type === 'allAbsences' ? true : item.type === absences.filter.type
     ))
-  }
-
-  // Apply pagination
-  if (absences.pagination.currentPage !== null) {
-    const currentPage = absences.pagination.currentPage
-
-    absences.data = absences.data.slice((currentPage - 1) * absencesPerPage, currentPage * absencesPerPage)
   }
 
   // Merge Absences and Members data using userId

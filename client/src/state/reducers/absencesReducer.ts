@@ -6,16 +6,9 @@ interface AbsencesFilter {
   date: string | null
 }
 
-interface AbsencesPagination {
-  currentPage: number | null
-  totalPages: number | null
-  totalAbsences: number | null
-}
-
 interface AbsencesState {
   status: 'Loading' | 'Success' | null
   filter: AbsencesFilter
-  pagination: AbsencesPagination
   data: any[] | null
 }
 
@@ -24,11 +17,6 @@ export const initialState: AbsencesState = {
   filter: {
     type: null,
     date: null
-  },
-  pagination: {
-    currentPage: null,
-    totalPages: null,
-    totalAbsences: null
   },
   data: []
 }
@@ -40,7 +28,6 @@ const reducer = (state: AbsencesState = initialState, action: AbsencesAction) =>
       return {
         status: action.payload.status,
         data: action.payload.data,
-        pagination: action.payload.pagination,
         filter: initialState.filter // Reset filter on load all
       }
 
@@ -48,12 +35,6 @@ const reducer = (state: AbsencesState = initialState, action: AbsencesAction) =>
       return {
         ...state,
         filter: action.payload
-      }
-
-    case AbsencesActionType.PAGINATE_ABSENCES:
-      return {
-        ...state,
-        pagination: action.payload
       }
 
     case AbsencesActionType.CLEAR_ALL_ABSENCES:

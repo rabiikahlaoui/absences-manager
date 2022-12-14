@@ -1,41 +1,36 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useDispatch, useSelector } from 'react-redux'
-import { getAbsencesPagination } from '../../state/selectors/absencesSelectors'
-import { paginateAbsences } from '../../state/action-creators/absencesActionCreators'
 
-const AbsencePaginator: React.FC<{}> = () => {
-  const dispatch = useDispatch<any>()
-  const paginationData = useSelector(getAbsencesPagination)
+interface Props {
+  currentPage: number
+  totalPages: number
+  totalAbsences: number
+  onPageChange: Function
+}
 
-  const dispatchPagination = (currentPage: number): void => {
-    dispatch(paginateAbsences({
-      ...paginationData,
-      currentPage
-    }))
-  }
-
+const AbsencePaginator: React.FC<Props> = ({ currentPage, totalPages, totalAbsences, onPageChange }) => {
   const applyPageChange = (e: any): void => {
-    if (isNaN(e.target.value)) {
+    const paginationValue = e.target.value
+
+    if (isNaN(paginationValue)) {
       return
     }
 
-    const paginationValue = e.target.value as number
-
-    if (paginationValue > paginationData.totalPages) {
+    if (paginationValue > totalPages || paginationValue < 1) {
       return
     }
 
-    if (paginationValue < 1) {
-      return
-    }
-
-    dispatchPagination(e.target.value)
+    onPageChange(paginationValue as number)
   }
 
   const moveToPage = (pagePosition: number): void => {
-    const newPage: number = (paginationData.currentPage as number) + pagePosition
-    dispatchPagination(newPage)
+    const newPage = currentPage + pagePosition
+
+    if (newPage > totalPages || newPage < 1) {
+      return
+    }
+
+    onPageChange(newPage)
   }
 
   return (
@@ -45,7 +40,7 @@ const AbsencePaginator: React.FC<{}> = () => {
         {/* Prev button */}
         <button
           className='absences-paginator--arrow arrow-left'
-          disabled={paginationData?.currentPage === 1}
+          disabled={currentPage === 1}
           onClick={() => moveToPage(-1)}
         ></button>
 
@@ -55,21 +50,21 @@ const AbsencePaginator: React.FC<{}> = () => {
           type="number"
           className='absences-paginator--form-control'
           min={1}
-          max={paginationData?.totalPages}
-          value={paginationData?.currentPage}
+          max={totalPages}
+          value={currentPage}
           onChange={(e) => applyPageChange(e)}
         />
-        <span className='absences-paginator--total-pages'>/ {paginationData?.totalPages}</span>
+        <span className='absences-paginator--total-pages'>/ {totalPages}</span>
 
         {/* Next button */}
         <button
           className='absences-paginator--arrow arrow-right'
-          disabled={paginationData?.currentPage === paginationData?.totalPages}
+          disabled={currentPage === totalPages}
           onClick={() => moveToPage(1)}
         ></button>
       </div>
 
-      <span className='absences-paginator--total-count'>Total absences: {paginationData?.totalAbsences}</span>
+      <span className='absences-paginator--total-count'>Total absences: {totalAbsences}</span>
     </PaginationWrapper>
   )
 }
