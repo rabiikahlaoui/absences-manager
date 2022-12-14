@@ -16,4 +16,4 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/api/absences', absencesRouter);
 app.use('/api/members', membersRouter);
 
-app.listen(5000, () => console.log('App listening on port 5000!'));
+app.listen(80, () => console.log('App listening on port 80!'));
