@@ -2,14 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { Alert, Loader } from '../../components'
-import { loadAbsences, clearAbsences } from '../../state/action-creators/absencesActionCreators'
-import { loadMembers, clearMembers } from '../../state/action-creators/membersActionCreators'
+import { absencesActionCreators, membersActionCreators } from '../../state'
 import { getMembersAbsences } from '../../state/selectors/absencesSelectors'
 import RequestStatus from '../../type-defs/requestStatus'
-
-import AbsenceFilter from './AbsencesFilter'
-import AbsenceList from './AbsencesList'
-import AbsencePaginator from './AbsencesPaginator'
+import { AbsencesFilter, AbsenceList, AbsencePaginator } from '.'
 
 // For pagination filter
 interface Pagination {
@@ -32,14 +28,14 @@ const AbsencePage: React.FC = () => {
 
   // Dispatch load absences on component mount
   useEffect(() => {
-    dispatch(loadAbsences())
-    dispatch(loadMembers())
+    dispatch(absencesActionCreators.loadAbsences())
+    dispatch(membersActionCreators.loadMembers())
   }, [])
 
   // Dispatch clear absences on component unmount
   useEffect(() => () => {
-    clearAbsences()
-    clearMembers()
+    absencesActionCreators.clearAbsences()
+    membersActionCreators.clearMembers()
   }, [])
 
   // Reset current page on absences list change
@@ -77,7 +73,7 @@ const AbsencePage: React.FC = () => {
 
   return (
     <Wrapper>
-      <AbsenceFilter />
+      <AbsencesFilter />
       {membersAbsences.data.length > 0
         ? (
           <>

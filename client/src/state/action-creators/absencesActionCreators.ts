@@ -2,7 +2,7 @@ import { Dispatch } from 'redux'
 import { AbsencesActionType } from '../action-types'
 import { AbsencesAction } from '../actions/absencesActions'
 
-import absencesService from '../../services/absences.service'
+import absencesService from '../../api/absences.service'
 import Absence from '../../type-defs/absence'
 import { AbsencesFilter } from '../reducers/absencesReducer'
 import RequestStatus from '../../type-defs/requestStatus'

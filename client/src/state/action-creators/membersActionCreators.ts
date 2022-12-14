@@ -2,7 +2,7 @@ import { Dispatch } from 'redux'
 import { MembersActionType } from '../action-types'
 import { MembersAction } from '../actions/membersActions'
 
-import membersService from '../../services/members.service'
+import membersService from '../../api/members.service'
 import Member from '../../type-defs/member'
 import RequestStatus from '../../type-defs/requestStatus'
 

@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { DatePicker, Select } from '../../components'
-import { filterAbsences } from '../../state/action-creators/absencesActionCreators'
+import { absencesActionCreators } from '../../state'
 
 interface filterData {
   date: string | null
   type: string | null
 }
 
-const AbsenceFilter: React.FC = () => {
+const AbsencesFilter: React.FC = () => {
   const [filterData, setFilterData] = useState<filterData>({ date: null, type: null })
   const dispatch = useDispatch<any>()
 
@@ -29,7 +29,7 @@ const AbsenceFilter: React.FC = () => {
     }
 
     setFilterData(initialFilterState)
-    dispatch(filterAbsences(initialFilterState))
+    dispatch(absencesActionCreators.filterAbsences(initialFilterState))
   }
 
   // Dispatch the local state to redux
@@ -91,4 +91,4 @@ const Wrapper = styled.div`
   }
 `
 
-export default AbsenceFilter
+export default AbsencesFilter
