@@ -57,7 +57,17 @@ export const getMembersAbsences = (state: any): any => {
   }
 
   // Merge Absences and Members data using userId
-  const membersAbsences = mergeArrays(absences.data, members.data, 'userId')
+  let membersAbsences = mergeArrays(absences.data, members.data, 'userId')
+
+  // Fill absence status
+  membersAbsences = membersAbsences.map((item: any) => ({
+    ...item,
+    status: item.confirmedAt === null
+      ? item.rejectedAt === null
+        ? 'Requested'
+        : 'Rejected'
+      : 'Confirmed'
+  }))
 
   return {
     status: 'Success',

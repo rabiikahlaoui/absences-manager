@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import onDownloadICalFile from '../../utils/generateICalFile'
 
 interface Props {
   absence: any
@@ -16,9 +17,16 @@ const AbsencesItem: React.FC<Props> = ({ absence }) => {
         <div className="absences-list--item-value w-120px">{absence.type}</div>
         <div className="absences-list--item-value w-200px">{absence.startDate} - {absence.endDate}</div>
         <div className="absences-list--item-value w-200px">{absence.memberNote}</div>
-        <div className="absences-list--item-value w-120px">status</div>
+        <div className="absences-list--item-value w-120px">{absence.status}</div>
         <div className="absences-list--item-value w-200px">{absence.admitterNote}</div>
-        <div className="absences-list--item-value w-120px"></div>
+        <div className='absences-list--item-value w-200px'>
+          <button
+            className='absences-list--download-ical'
+            onClick={() => onDownloadICalFile(absence)}
+          >
+            Download iCal file
+          </button>
+        </div>
       </ItemWrapper>
     </>
   )
@@ -51,6 +59,16 @@ const ItemWrapper = styled.div`
     display: flex;
     align-items: center;
     padding: 8px 12px;
+  }
+
+  .absences-list--download-ical {
+    color: #ff9419;
+    font-weight: 600;
+    font-size: 14px;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
   }
 `
 
