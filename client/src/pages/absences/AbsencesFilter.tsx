@@ -6,8 +6,6 @@ import Select from '../../components/form/Select'
 
 import { filterAbsences } from '../../state/action-creators/absencesActionCreators'
 
-// import { getAbsencesFilter } from '../../state/selectors/absencesSelectors'
-
 interface filterForm {
   date: string | null
   type: string | null
