@@ -1,8 +1,17 @@
-// import hasUndefinedProperties from '../../utils/hasUndefinedProperties'
+import filterArrayByDate from '../../utils/filterArrayByDate'
 import mergeArrays from '../../utils/mergeArrays'
 
 const getAbsences = (state: any): any => {
   return state.absences
+}
+
+/**
+ * Get absences filter
+ * @param state redux store
+ * @returns absences filter data
+ */
+export const getAbsencesFilter = (state: any): any => {
+  return state.absences.filter
 }
 
 /**
@@ -11,7 +20,7 @@ const getAbsences = (state: any): any => {
  * @returns members absences loading status and list
  */
 export const getMembersAbsences = (state: any): any => {
-  const absences = state.absences
+  const absences = { ...state.absences }
   const members = state.members
 
   // Check for null status (initial state)
@@ -26,6 +35,20 @@ export const getMembersAbsences = (state: any): any => {
     return {
       status: 'Loading'
     }
+  }
+
+  // Apply filter by date
+  if (absences.filter.date !== null) {
+    absences.data = absences.data.filter((item: any) => (
+      filterArrayByDate(item.startDate, item.endDate, absences.filter.date)
+    ))
+  }
+
+  // Apply filter by type
+  if (absences.filter.type !== null) {
+    absences.data = absences.data.filter((item: any) => (
+      absences.filter.type === 'allAbsences' ? true : item.type === absences.filter.type
+    ))
   }
 
   // Merge Absences and Members data using userId

@@ -29,6 +29,14 @@ const clearAbsencesAction = (): AbsencesAction => ({
 })
 
 /**
+ * Action to dispatch to update the filter
+ */
+const filterAbsencesAction = (filterData: any): AbsencesAction => ({
+  type: AbsencesActionType.FILTER_ABSENCES,
+  payload: filterData
+})
+
+/**
  * Load absences
  */
 export const loadAbsences = () => async (dispatch: Dispatch<AbsencesAction>) => {
@@ -50,4 +58,11 @@ export const loadAbsences = () => async (dispatch: Dispatch<AbsencesAction>) => 
  */
 export const clearAbsences = () => (dispatch: Dispatch<AbsencesAction>) => {
   dispatch(clearAbsencesAction())
+}
+
+/**
+ * Filter absences
+ */
+export const filterAbsences = (filterData: any) => async (dispatch: Dispatch<AbsencesAction>) => {
+  dispatch(filterAbsencesAction(filterData))
 }

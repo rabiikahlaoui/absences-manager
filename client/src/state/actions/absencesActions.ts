@@ -12,4 +12,9 @@ type clearAbsencesAction = {
   type: AbsencesActionType.CLEAR_ALL_ABSENCES
 }
 
-export type AbsencesAction = loadAbsencesAction | clearAbsencesAction
+type filterAbsencesAction = {
+  type: AbsencesActionType.FILTER_ABSENCES,
+  payload: any
+}
+
+export type AbsencesAction = loadAbsencesAction | clearAbsencesAction | filterAbsencesAction

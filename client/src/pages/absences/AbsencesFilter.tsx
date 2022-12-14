@@ -1,24 +1,70 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import DatePicker from '../../components/form/DatePicker'
 import Select from '../../components/form/Select'
 
+import { filterAbsences } from '../../state/action-creators/absencesActionCreators'
+
+// import { getAbsencesFilter } from '../../state/selectors/absencesSelectors'
+
+interface filterForm {
+  date: string | null
+  type: string | null
+}
+
 const AbsenceFilter: React.FC<{}> = () => {
+  const [filterData, setFilterData] = useState<filterForm>({ date: null, type: null })
+  const dispatch = useDispatch<any>()
+
+  // const absencesFilter = useSelector(getAbsencesFilter)
+
+  // Set filter local state
+  const handleFilterChange = (e: any): void => {
+    setFilterData({
+      ...filterData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  // Reset filter local and redux state
+  const resetFilter = (): void => {
+    const initialFilterState = {
+      date: null,
+      type: null
+    }
+
+    setFilterData(initialFilterState)
+    dispatch(filterAbsences(initialFilterState))
+  }
+
+  // Dispatch the local state to redux
+  const dispatchFilter = (): void => {
+    dispatch(filterAbsences(filterData))
+  }
+
   return (
     <>
       <Wrapper>
         <DatePicker
-          label='Date'
+          label='Date of absence'
+          value={filterData.date ?? ''}
+          name='date'
+          onChange={(e: any) => handleFilterChange(e)}
         />
         <Select
-          label='Date'
+          label='Type of absence'
+          value={filterData.type ?? ''}
+          name='type'
           options={{
+            allAbsences: 'All absences',
             sickness: 'Sickness',
             vacation: 'Vacation'
           }}
+          onChange={(e: any) => handleFilterChange(e)}
         />
-        <button className='absences-filter--reset-button'>Reset</button>
-        <button className='absences-filter--apply-button'>Apply</button>
+        <button className='absences-filter--reset-button' onClick={resetFilter}>Reset</button>
+        <button className='absences-filter--apply-button' onClick={dispatchFilter}>Apply</button>
       </Wrapper>
     </>
   )
