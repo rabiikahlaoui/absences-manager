@@ -3,19 +3,16 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import DatePicker from '../../components/form/DatePicker'
 import Select from '../../components/form/Select'
-
 import { filterAbsences } from '../../state/action-creators/absencesActionCreators'
 
-interface filterForm {
+interface filterData {
   date: string | null
   type: string | null
 }
 
 const AbsenceFilter: React.FC<{}> = () => {
-  const [filterData, setFilterData] = useState<filterForm>({ date: null, type: null })
+  const [filterData, setFilterData] = useState<filterData>({ date: null, type: null })
   const dispatch = useDispatch<any>()
-
-  // const absencesFilter = useSelector(getAbsencesFilter)
 
   // Set filter local state
   const handleFilterChange = (e: any): void => {
