@@ -29,6 +29,7 @@ npm run start
 The available routes are:
 * [http://localhost/api/absences](http://localhost/api/absences) to retreive the list of absences
 * [http://localhost/api/members](http://localhost/api/members) to retreive the list of members
+
 The available commands are:
 * `npm run start` to start the dev server
 * `npm run lint` runs the linting tool (eslint)
@@ -42,6 +43,7 @@ npm run start
 ```
 The available routes are:
 * [http://localhost:3000](http://localhost:3000) The list of absences
+
 The available commands are:
 * `npm run start` to start the dev server
 * `npm run build` build the application for deployment
