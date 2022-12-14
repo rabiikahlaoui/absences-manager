@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
+import Alert from '../../components/Alert'
+import Loader from '../../components/Loader'
 import { loadAbsences, clearAbsences } from '../../state/action-creators/absencesActionCreators'
 import { loadMembers, clearMembers } from '../../state/action-creators/membersActionCreators'
 import { getMembersAbsences } from '../../state/selectors/absencesSelectors'
@@ -47,26 +49,37 @@ const AbsencePage: React.FC<{}> = () => {
   }
 
   if (membersAbsences.status === 'Loading') {
-    return <>Loading...</>
+    return <Loader />
   }
 
   if (!Array.isArray(membersAbsences.data)) {
-    return <>Error...</>
+    return <Alert message='Failed to load the list' />
   }
 
   return (
     <Wrapper>
       <AbsenceFilter />
-      <AbsencePaginator
-        currentPage={pagination.currentPage}
-        totalPages={calculateTotalPages(membersAbsences.data.length)}
-        totalAbsences={membersAbsences.data.length}
-        onPageChange={(newPage: number) => setPage(newPage)}
-      />
-      <AbsenceList
-        status={membersAbsences.status}
-        absences={membersAbsences.data.slice((pagination.currentPage - 1) * 10, pagination.currentPage * 10)}
-      />
+      {membersAbsences.data.length > 0
+        ? (
+          <>
+            <AbsencePaginator
+              currentPage={pagination.currentPage}
+              totalPages={calculateTotalPages(membersAbsences.data.length)}
+              totalAbsences={membersAbsences.data.length}
+              onPageChange={(newPage: number) => setPage(newPage)}
+            />
+            <AbsenceList
+              status={membersAbsences.status}
+              absences={membersAbsences.data.slice((pagination.currentPage - 1) * 10, pagination.currentPage * 10)}
+            />
+          </>
+          )
+        : (
+          <Alert
+            message='Nothing to show'
+          />
+          )
+      }
     </Wrapper>
   )
 }
