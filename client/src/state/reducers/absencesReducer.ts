@@ -8,7 +8,7 @@ export interface AbsencesFilter {
   date: string | null
 }
 
-interface AbsencesState {
+export interface AbsencesState {
   status: RequestStatus | null
   filter: AbsencesFilter
   data: Absence[] | null

@@ -1,9 +1,9 @@
-import { AxiosResponse } from 'axios'
-import api from './http-common'
+import axios, { AxiosResponse } from 'axios'
+import { baseUrl } from './api-config'
 
 class MembersDataService {
   async getAll (): Promise<AxiosResponse> {
-    return await api.get('/members')
+    return await axios.get(`${baseUrl}/members`)
   }
 }
 

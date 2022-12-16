@@ -21,11 +21,13 @@ const reducer = (state: MembersState = initialState, action: MembersAction) => {
 
     case MembersActionType.LOADING_ALL_MEMBERS:
       return {
+        ...initialState,
         status: RequestStatus.Loading
       }
 
     case MembersActionType.ERROR_LOADING_MEMBERS:
       return {
+        ...initialState,
         status: RequestStatus.Error
       }
 

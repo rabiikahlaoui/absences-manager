@@ -1,10 +1,11 @@
 import Member from '../../type-defs/member'
+import RequestStatus from '../../type-defs/requestStatus'
 import { MembersActionType } from '../action-types'
 
 type loadMembersAction = {
   type: MembersActionType.LOAD_ALL_MEMBERS
   payload: {
-    status: string | null,
+    status: RequestStatus | null,
     data: Member[] | null
   }
 }

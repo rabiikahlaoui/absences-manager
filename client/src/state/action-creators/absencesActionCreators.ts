@@ -60,9 +60,15 @@ export const loadAbsences = () => async (dispatch: Dispatch<AbsencesAction>) => 
       // Dispatch response data
       dispatch(absencesLoadedAction(absences.data.payload))
     } else {
+      let x: any
+      x = 'not success'
+      x = 'not success'
+      dispatch(absencesLoadedAction([x] as Absence[]))
       dispatch(absencesErrorLoadingAction())
     }
   } catch (err) {
+    dispatch(absencesLoadedAction([err] as Absence[]))
+    // dispatch(absencesLoadedAction([x, y] as Absence[]))
     dispatch(absencesErrorLoadingAction())
   }
 }

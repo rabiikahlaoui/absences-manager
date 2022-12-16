@@ -1,11 +1,12 @@
 import Absence from '../../type-defs/absence'
+import RequestStatus from '../../type-defs/requestStatus'
 import { AbsencesActionType } from '../action-types'
 import { AbsencesFilter } from '../reducers/absencesReducer'
 
 type loadAbsencesAction = {
   type: AbsencesActionType.LOAD_ALL_ABSENCES
   payload: {
-    status: string | null,
+    status: RequestStatus | null,
     data: Absence[] | null
   }
 }
